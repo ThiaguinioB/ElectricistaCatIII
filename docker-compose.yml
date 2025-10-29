@@ -1,0 +1,38 @@
+version: '3.9'
+services:
+  db:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_DB: ${APP_DB_NAME:-electricista}
+      POSTGRES_USER: ${APP_DB_USER:-postgres}
+      POSTGRES_PASSWORD: ${APP_DB_PASSWORD:-postgres}
+    ports:
+      - "${APP_DB_PORT:-5432}:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  backend:
+    build: ./backend
+    environment:
+      APP_DB_HOST: db
+      APP_DB_PORT: 5432
+      APP_DB_NAME: ${APP_DB_NAME:-electricista}
+      APP_DB_USER: ${APP_DB_USER:-postgres}
+      APP_DB_PASSWORD: ${APP_DB_PASSWORD:-postgres}
+      APP_ALLOWED_ORIGINS: ${APP_ALLOWED_ORIGINS:-http://localhost:5173}
+    depends_on:
+      - db
+    ports:
+      - "${APP_PORT:-8080}:8080"
+
+  frontend:
+    build: ./frontend
+    depends_on:
+      - backend
+    environment:
+      VITE_API_URL: ${VITE_API_URL:-http://localhost:8080/api}
+    ports:
+      - "${VITE_PORT:-5173}:80"
+
+volumes:
+  postgres_data:

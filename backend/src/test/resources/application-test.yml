@@ -1,0 +1,5 @@
+rate-limiting:
+  enabled: false
+spring:
+  flyway:
+    enabled: true
