@@ -1,0 +1,73 @@
+{
+  "info": {
+    "name": "Electricista Cat III",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Crear proyecto",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/projects",
+          "host": ["{{baseUrl}}"],
+          "path": ["projects"]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Obra piloto\",\n  \"voltageSystemType\": \"SINGLE_PHASE\"\n}"
+        }
+      }
+    },
+    {
+      "name": "Añadir circuito",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/panels/1/circuits",
+          "host": ["{{baseUrl}}"],
+          "path": ["panels", "1", "circuits"]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Iluminación sala\",\n  \"demandPowerKw\": 2.5,\n  \"phaseType\": \"SINGLE_PHASE\",\n  \"conductorCrossSection\": 2.5,\n  \"conductorMaterial\": \"CU\",\n  \"installationMethod\": \"concealed_conduit\"\n}"
+        }
+      }
+    },
+    {
+      "name": "Reporte técnico",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/pdf"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/projects/1/report",
+          "host": ["{{baseUrl}}"],
+          "path": ["projects", "1", "report"]
+        }
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080/api"
+    }
+  ]
+}

@@ -1,0 +1,88 @@
+spring:
+  application:
+    name: electricista-backend
+  datasource:
+    url: jdbc:postgresql://${APP_DB_HOST:localhost}:${APP_DB_PORT:5432}/${APP_DB_NAME:electricista}
+    username: ${APP_DB_USER:postgres}
+    password: ${APP_DB_PASSWORD:postgres}
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        format_sql: true
+    open-in-view: false
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+  mvc:
+    problemdetails:
+      enabled: true
+
+server:
+  port: ${APP_PORT:8080}
+  servlet:
+    context-path: /
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  endpoint:
+    health:
+      probes:
+        enabled: true
+
+logging:
+  level:
+    root: INFO
+    com.electricistacat.backend: DEBUG
+  pattern:
+    console: "%d{yyyy-MM-dd'T'HH:mm:ss.SSSXXX} %-5level [%X{traceId:-}] [%thread] %logger - %msg%n"
+
+cors:
+  allowed-origins: ${APP_ALLOWED_ORIGINS:http://localhost:5173}
+  allowed-methods: GET,POST,PUT,DELETE,OPTIONS
+  allowed-headers: "*"
+
+rate-limiting:
+  enabled: true
+  capacity: 100
+  refill-tokens: 100
+  refill-period-seconds: 60
+
+standards:
+  dataset: classpath:standards/standards.json
+  default-profile-code: AEA-90364-7
+
+app:
+  voltage-drop:
+    lighting-limit-percent: 3.0
+    general-limit-percent: 5.0
+  default:
+    voltage-single-phase: 230
+    voltage-three-phase: 400
+    cosphi: 0.9
+    efficiency: 0.9
+    conductor-material: CU
+    installation-method: concealed_conduit
+
+---
+spring:
+  config:
+    activate:
+      on-profile: prod
+  datasource:
+    url: jdbc:postgresql://${APP_DB_HOST}:${APP_DB_PORT}/${APP_DB_NAME}
+    username: ${APP_DB_USER}
+    password: ${APP_DB_PASSWORD}
+logging:
+  level:
+    root: INFO
+  pattern:
+    console: "%d{yyyy-MM-dd'T'HH:mm:ss.SSSXXX} %-5level [%thread] %logger - %msg%n"
+rate-limiting:
+  capacity: ${RATE_LIMIT_CAPACITY:60}
+  refill-tokens: ${RATE_LIMIT_REFILL_TOKENS:60}
+  refill-period-seconds: ${RATE_LIMIT_REFILL_PERIOD_SECONDS:60}

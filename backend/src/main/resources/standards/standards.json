@@ -1,0 +1,148 @@
+{
+  "calcProfiles": [
+    {
+      "code": "AEA-90364-7",
+      "name": "AEA 90364-7 Residencial",
+      "description": "Perfil base para instalaciones residenciales en Córdoba, Argentina.",
+      "standardReferences": ["AEA 90364-7", "IRAM 2183", "IEC 60364"],
+      "voltageDropLimits": {
+        "lighting": 3.0,
+        "general": 5.0
+      }
+    },
+    {
+      "code": "IRAM-770-Industrial",
+      "name": "IRAM 770 Industrial Ligero",
+      "description": "Plantilla de cálculo para tableros industriales ligeros.",
+      "standardReferences": ["IRAM 770", "IEC 60947"],
+      "voltageDropLimits": {
+        "lighting": 2.5,
+        "general": 4.0
+      }
+    }
+  ],
+  "thermalCapacities": [
+    {
+      "standard": "IRAM-2183",
+      "installationMethod": "concealed_conduit",
+      "material": "CU",
+      "insulation": "PVC",
+      "crossSectionMm2": 2.5,
+      "iz": 24.0
+    },
+    {
+      "standard": "IRAM-2183",
+      "installationMethod": "concealed_conduit",
+      "material": "CU",
+      "insulation": "PVC",
+      "crossSectionMm2": 4.0,
+      "iz": 32.0
+    },
+    {
+      "standard": "IRAM-2183",
+      "installationMethod": "tray_perforated",
+      "material": "CU",
+      "insulation": "XLPE",
+      "crossSectionMm2": 6.0,
+      "iz": 40.0
+    }
+  ],
+  "correctionFactors": [
+    {
+      "type": "ambient_temperature",
+      "key": "30",
+      "factor": 1.0,
+      "notes": "Temperatura de referencia 30°C"
+    },
+    {
+      "type": "ambient_temperature",
+      "key": "40",
+      "factor": 0.91
+    },
+    {
+      "type": "grouping",
+      "key": "1",
+      "factor": 1.0
+    },
+    {
+      "type": "grouping",
+      "key": "2",
+      "factor": 0.8
+    },
+    {
+      "type": "grouping",
+      "key": "3",
+      "factor": 0.7
+    }
+  ],
+  "breakerCatalog": [
+    {
+      "curve": "C",
+      "rating": 16,
+      "tolerance": 1.13,
+      "standard": "IEC-60898"
+    },
+    {
+      "curve": "C",
+      "rating": 20,
+      "tolerance": 1.13,
+      "standard": "IEC-60898"
+    },
+    {
+      "curve": "C",
+      "rating": 25,
+      "tolerance": 1.13,
+      "standard": "IEC-60898"
+    },
+    {
+      "curve": "D",
+      "rating": 32,
+      "tolerance": 1.25,
+      "standard": "IEC-60898"
+    }
+  ],
+  "conductorProperties": [
+    {
+      "material": "CU",
+      "resistivityOhmPerKm": 0.0181,
+      "reactanceOhmPerKm": 0.00008
+    },
+    {
+      "material": "AL",
+      "resistivityOhmPerKm": 0.0283,
+      "reactanceOhmPerKm": 0.0001
+    }
+  ],
+  "templates": [
+    {
+      "code": "AC_UNIT",
+      "name": "Unidad de Aire Acondicionado",
+      "description": "Circuito dedicado para acondicionadores tipo split.",
+      "defaultPowerKw": 2.2,
+      "recommendedBreaker": {
+        "curve": "C",
+        "rating": 20
+      },
+      "recommendedCable": {
+        "crossSectionMm2": 2.5,
+        "material": "CU",
+        "insulation": "PVC"
+      }
+    },
+    {
+      "code": "PUMP",
+      "name": "Bomba Hidráulica",
+      "description": "Circuito trifásico para bombas centrífugas.",
+      "defaultPowerKw": 5.5,
+      "recommendedBreaker": {
+        "curve": "D",
+        "rating": 32
+      },
+      "recommendedCable": {
+        "crossSectionMm2": 6.0,
+        "material": "CU",
+        "insulation": "XLPE"
+      }
+    }
+  ]
+}
