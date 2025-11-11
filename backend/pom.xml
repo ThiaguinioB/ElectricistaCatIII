@@ -22,6 +22,7 @@
     </properties>
 
     <dependencies>
+        <!-- Spring Boot Core -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
@@ -38,11 +39,15 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
+
+        <!-- OpenAPI / Swagger -->
         <dependency>
             <groupId>org.springdoc</groupId>
             <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
             <version>${springdoc.version}</version>
         </dependency>
+
+        <!-- Database -->
         <dependency>
             <groupId>org.flywaydb</groupId>
             <artifactId>flyway-core</artifactId>
@@ -52,6 +57,8 @@
             <artifactId>postgresql</artifactId>
             <scope>runtime</scope>
         </dependency>
+
+        <!-- Utilities -->
         <dependency>
             <groupId>org.mapstruct</groupId>
             <artifactId>mapstruct</artifactId>
@@ -71,11 +78,16 @@
             <artifactId>problem-spring-web</artifactId>
             <version>0.29.1</version>
         </dependency>
+
+        <!-- Rate Limiting -->
         <dependency>
             <groupId>io.github.bucket4j</groupId>
             <artifactId>bucket4j-core</artifactId>
-            <version>8.8.1</version>
+            <version>8.7.0</version>
         </dependency>
+
+
+        <!-- PDF + CSV -->
         <dependency>
             <groupId>org.apache.pdfbox</groupId>
             <artifactId>pdfbox</artifactId>
@@ -86,6 +98,8 @@
             <artifactId>commons-csv</artifactId>
             <version>1.11.0</version>
         </dependency>
+
+        <!-- Testing -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
@@ -116,11 +130,14 @@
 
     <build>
         <plugins>
+            <!-- Spring Boot -->
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>${spring-boot.version}</version>
             </plugin>
+
+            <!-- Compiler -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -142,6 +159,8 @@
                     </annotationProcessorPaths>
                 </configuration>
             </plugin>
+
+            <!-- Jacoco Coverage -->
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
@@ -161,6 +180,8 @@
                     </execution>
                 </executions>
             </plugin>
+
+            <!-- Test Plugins -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
@@ -195,8 +216,9 @@
 
     <repositories>
         <repository>
-            <id>central</id>
-            <url>https://repo1.maven.org/maven2/</url>
+            <id>bucket4j-github</id>
+            <url>https://raw.githubusercontent.com/vladimir-bukhtoyarov/bucket4j-maven-repo/master/</url>
         </repository>
     </repositories>
+
 </project>
